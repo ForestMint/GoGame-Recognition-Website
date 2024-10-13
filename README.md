@@ -1,6 +1,6 @@
 
 <div align="center">
-    <img src="static/GoStreamLogoTitleRight.png" width=500>
+    <img src="website/static/GoStreamLogoTitleRight.png" width=500>
     <h1>GOGAME DETECTION</h1>
 
 <h3>Developed with the software and tools below</h3>
@@ -45,10 +45,10 @@ Key Highlights:
 
 ## Demo
 Game mode demo where playing have to be according to Go rules: 
-[Game Mode](static/game_mode.mp4)
+[Game Mode](website/static/game_mode.mp4)
 
 Free or transparent mode demo where one can place any stone anywhere anytime: 
-[Free Mode](static/free_mode.mp4)
+[Free Mode](website/static/free_mode.mp4)
 
 
 
@@ -69,7 +69,7 @@ Free or transparent mode demo where one can place any stone anywhere anytime:
 
 - **UML Diagramm:**
 <div align="center">
-    <img src="static/classes.png" width=700>
+    <img src="website/static/classes.png" width=700>
 </div>
 
 - **Detection algorithm:**
