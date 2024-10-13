@@ -1,0 +1,16 @@
+version: "3"
+services:
+  go_stream_website:
+    build: ./website
+    ports:
+      - "5002:5000"
+    restart : always
+    container_name: go_stream_website_container
+    depends_on:
+      - go_stream_mongo
+  go_stream_mongo:
+    container_name: go_stream_mongo_container
+    image : mongo:latest
+    ports:
+     - "5001:27017"
+    restart : always
