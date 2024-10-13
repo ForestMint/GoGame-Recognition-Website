@@ -124,7 +124,9 @@ python run.py
 
 ## 🐙 Run the application with [Docker Compose](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://docs.docker.com/compose/&ved=2ahUKEwi06YL5hYyJAxVWU6QEHdT8EcMQFnoECAoQAQ&usg=AOvVaw02oes91geDSZ-H__u_XMxc)
 Install Docker on your system of subsystem
+
 Change directory to GoGame-Recognition-Website
+
 Create the images and containers with one single command
 ```sh
 docker-compose up -d
@@ -134,7 +136,9 @@ docker-compose up -d
 
 ## 🐋 Run a micro-system of the application in a container with [Docker](https://www.docker.com/)
 Install Docker on your system of subsystem
+
 Change directory to the sub-directory of GoGame-Recognition-Website
+
 Create a Docker image
 ```sh
 docker build -t <my-image> .
