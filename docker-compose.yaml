@@ -9,8 +9,8 @@ services:
     depends_on:
       - go_stream_mongo
   go_stream_mongo:
+    build: ./mongo
     container_name: go_stream_mongo_container
-    image : mongo:latest
     ports:
      - "5001:27017"
     restart : always

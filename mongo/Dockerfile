@@ -1,5 +1,5 @@
 FROM mongo:latest
-FROM node
+#FROM node
 #RUN mongod
-COPY . .
-RUN node ./scripts/load-games.js
+#COPY . .
+#RUN node ./scripts/load-games.js
