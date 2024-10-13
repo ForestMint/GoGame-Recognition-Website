@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}Play{% endblock %}
+
+{% block content %}
+<div class="row text-center p-3">
+    <i>
+        <div id="turn" class="py-2 px-4 custom-color" style="font-size: 20px;">
+        No game is being played at the moment
+        </div>
+    </i>
+
+    <div class=" row custom-container p-3">
+        <div class="col-3 d-flex align-items-center">
+            <div class="d-grid gap-4 col-8 mx-auto">
+                <button class="btn btn-primary" id="start-game" style="background-color: #ecce97; border-color: #ecce97; color: black;">
+                    NEW GAME
+                </button>
+                <button class="btn btn-primary" id="undo" style="background-color: #eb6b67; border-color: #eb6b67; color: black;">
+                    UNDO
+                </button>
+                <button class="btn btn-primary" id="resign" style="background-color: #eb6b67; border-color: #eb6b67; color: black;">
+                    RESIGN
+                </button>
+                <button class="btn btn-primary" id="download-sgf" style="background-color: #ecce97; border-color: #ecce97;color: black;">
+                    GET SGF
+                </button> 
+            </div>       
+        </div>
+
+        <div class="col container position-relative text-center px-0 mx-0">
+                        
+            <canvas id="go-board" width="600" height="600" style="border:1px solid #000000;"></canvas>
+            <canvas id="hover-canvas" class="position-absolute top-0 start-0"></canvas>
+
+            <div class="row align-items-start">
+                <form method="POST" id="controls" class="btn-group-lg">
+                    <button class="btn btn-nav mx-1" id="initial">   &lt;&lt;  </button>     
+                    <button class="btn btn-nav mx-1" id="previous">    &lt;   </button>     
+                    <button class="btn btn-nav mx-1" id="next">    &gt;   </button>     
+                    <button class="btn btn-nav mx-1" id="last">   &gt;&gt;  </button>
+                </form>
+            </div>
+        </div>
+        <div class="col-3 d-flex">
+            <div class="container rounded bg-dark">
+                <i class="custom-color">
+                    info ..
+                </i>
+                <!-- <svg width="100" height="100">
+                    <circle cx="10" cy="20" r="10" fill="black" />
+                </svg>
+                <span class="custom-color">Black Player</span> 
+                <svg width="100" height="100">
+                    <circle cx="10" cy="20" r="10" fill="white" />
+                </svg>
+                White Player -->
+            </div>
+        </div>
+
+    </div> 
+</div>
+{% endblock %}
+{% block js %}<script src="static/play.js"></script>{% endblock %}
