@@ -2,7 +2,6 @@ import numpy as np
 import sente
 
 
-
 class GoGame:
     """
     GoGame is the class responsible for managing the game, comparing frames and finding the newly played move
@@ -387,3 +386,6 @@ class GoGame:
         # Use the sente.sgf.dumps function to convert the game to SGF format
         return sente.sgf.dumps(self.game)
 
+
+if __name__ == "__main__":
+    my_go_game = GoGame()
