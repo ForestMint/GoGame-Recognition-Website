@@ -122,6 +122,23 @@ python run.py
 
 ---
 
+## 🐍 Run the application in a Anaconda environment
+Install Anaconda
+Change directory to the GoGame-Recognition-Website directory
+Create an environment
+```sh
+conda env create -f environment.yml
+```
+Activate the environment
+```sh
+conda activate go-stream
+```
+Run the app
+```sh
+python run.py
+```
+---
+
 ## 🐋 Run the application in a container with [Docker](https://www.docker.com/)
 Install Docker on your system of subsystem
 Change directory to the GoGame-Recognition-Website directory

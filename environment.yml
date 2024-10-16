@@ -1,0 +1,6 @@
+name : go-stream
+channels :
+  - https://conda.anaconda.org/menpo
+  - conda-forge
+dependencies :
+  - wheel==0.44.0
