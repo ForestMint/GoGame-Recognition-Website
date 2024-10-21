@@ -122,7 +122,7 @@ python run.py
 
 ---
 
-## 🐍 Run the application in a Anaconda environment
+## 🐍 Run the application in an [Anaconda](https://anaconda.org/) environment
 Install Anaconda
 
 Change directory to the GoGame-Recognition-Website directory
