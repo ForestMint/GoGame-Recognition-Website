@@ -1,6 +1,6 @@
 "use strict";
 var board = new Image();
-board.src = 'static/empty_board.jpg';
+board.src = 'static/19x19_empty_board.jpg';
 
 const controls = document.getElementById("controls");
 const start_button = document.getElementById("start-button");

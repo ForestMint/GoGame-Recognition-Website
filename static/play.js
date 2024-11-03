@@ -1,7 +1,7 @@
 "use strict";
 
 var board = new Image();
-board.src = 'static/empty_board.jpg';
+board.src = 'static/19x19_empty_board.jpg';
 
 const controls = document.getElementById("controls");
 
@@ -45,7 +45,7 @@ start_button.addEventListener('click', function(event) {
     }).then(function(response){
         if(response.status == 204){
             turn.textContent = "Game started! BLACK to play"
-            board.src = 'static/empty_board.jpg';
+            board.src = 'static/19x19_empty_board.jpg';
             board_context.drawImage(board, 0, 0);
             undo_button.disabled = false;
             resign_button.disabled = false;

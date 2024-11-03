@@ -9,7 +9,7 @@ from __init__ import app
 
 cam_index = 0
 
-model = YOLO('GoStreamDetection/model.pt')
+model = YOLO('GoStreamDetection/19x19_model.pt')
 
 usual_message = "Everything is well detected"
 message = "Nothing is being streamed for the moment"
@@ -20,8 +20,8 @@ ProcessFrame = None
 Process = True
 initialized = False
 sgf_text = None
-empty_board = cv2.imread("static/empty_board.jpg")
-game_plot = empty_board
+size_19_empty_board = cv2.imread("static/19x19_empty_board.jpg")
+game_plot = size_19_empty_board
 process_thread = None
 go_game = None
 transparent_mode = False
@@ -47,7 +47,7 @@ def new_game(transparent_mode=False):
     go_visual = GoVisual(game)
     go_board = GoBoard(model)
     go_game = GoGame(game, go_board, go_visual, transparent_mode)
-    game_plot = empty_board
+    game_plot = size_19_empty_board
     initialized = False
 
 def processing_thread(ProcessFrame=None):
