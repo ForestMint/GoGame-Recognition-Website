@@ -196,7 +196,8 @@ class GoVisual:
         """
     
         square_size = 30
-        circle_radius = 12
+        stone_circle_radius = 12
+        star_point_circle_radius = 4
         
         #set up the board's background
         board =np.full(((self.board_size+1)*square_size, (self.board_size+1)*square_size, 3), (69, 166, 245), dtype=np.uint8)
@@ -213,25 +214,59 @@ class GoVisual:
             cv2.putText(board, str(i), (5, square_size*i), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, color=(0, 0, 0), thickness=1)
             cv2.putText(board, str(i), (580, square_size*i), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=0.5, color=(0, 0, 0), thickness=1)
 
+        # Draw star points
+        star_points_positions = {
+            9:[
+                [2,2],
+                [2,6],
+                [6,2],
+                [6,6]
+            ],
+            13:[
+                [3,3],
+                [3,9],
+                [6,6],
+                [9,3],
+                [9,9]
+            ],
+            19:[
+                [3,3],
+                [3,9],
+                [3,15],
+                [9,3],
+                [9,9],
+                [9,15],
+                [15,3],
+                [15,9],
+                [15,15]
+            ]
+            }
+
+        if self.board_size in [9,13,19]:
+            for row in range(1,self.board_size+1):
+                for col in range(1,self.board_size+1):
+                    if [row,col] in star_points_positions [self.board_size]   :
+                        cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), star_point_circle_radius, color=(0, 0, 0), thickness=-1) # draw the star point
+
         # Draw stones
         for stone in black_stones:
             row, col = stone
             board2[row, col] = 1
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=(0, 0, 0), thickness=-1) # draw the stone
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(0, 0, 0), thickness=-1) # draw the stone
 
         for stone in white_stones:
             row, col = stone
             board2[row, col] = 1
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=(255, 255, 255), thickness=-1) # draw the stone
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(255, 255, 255), thickness=-1) # draw the stone
         
         #setting the contour of the last move to a different color
         if self.last_move is not None:
             row, col, color = self.last_move.get_x(), self.last_move.get_y(), self.last_move.get_stone().name
             stone_color = (0, 0, 0) if color == 'BLACK' else (255, 255, 255)
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=(0,0,255), thickness=2) 
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), circle_radius, color=stone_color, thickness=-1) 
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(0,0,255), thickness=2) 
+            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=stone_color, thickness=-1) 
 
         return board
 
