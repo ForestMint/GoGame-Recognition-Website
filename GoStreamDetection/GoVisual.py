@@ -198,6 +198,8 @@ class GoVisual:
         square_size = 30
         stone_circle_radius = 12
         star_point_circle_radius = 4
+        last_move_played_inner_circle_radius = 8
+      
         
         #set up the board's background
         board =np.full(((self.board_size+1)*square_size, (self.board_size+1)*square_size, 3), (69, 166, 245), dtype=np.uint8)
@@ -255,18 +257,24 @@ class GoVisual:
             cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
             cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(0, 0, 0), thickness=-1) # draw the stone
 
+
         for stone in white_stones:
             row, col = stone
             board2[row, col] = 1
             cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(66, 66, 66), thickness=2) # draw the edge
             cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(255, 255, 255), thickness=-1) # draw the stone
-        
+
         #setting the contour of the last move to a different color
         if self.last_move is not None:
             row, col, color = self.last_move.get_x(), self.last_move.get_y(), self.last_move.get_stone().name
             stone_color = (0, 0, 0) if color == 'BLACK' else (255, 255, 255)
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(0,0,255), thickness=2) 
-            cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=stone_color, thickness=-1) 
+            if color == 'BLACK' :
+                cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), last_move_played_inner_circle_radius, color=(255,255,255), thickness=2) 
+            else :
+                cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), last_move_played_inner_circle_radius, color=(0,0,0), thickness=2) 
+
+            #cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=(0,0,255), thickness=2) 
+            #cv2.circle(board, ((row+1)*square_size, (col+1)*square_size), stone_circle_radius, color=stone_color, thickness=-1)
 
         return board
 
