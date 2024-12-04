@@ -1,3 +1,6 @@
+import os
+os.environ["OMP_NUM_THREADS"] = '1'
+
 from main import app
 
 
