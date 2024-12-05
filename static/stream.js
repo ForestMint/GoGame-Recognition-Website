@@ -146,15 +146,21 @@ async function update_state(){
         //console.log(response)
 
         
-        //console.log(data)
+        console.log(data)
         
         //captures = data.captures;
         
         //console.log(captures)
         /*
-        document.getElementById("white_captures").innerHTML = str(captures["white"]) +" captures";
-        document.getElementById("black_captures").innerHTML = str(captures["black"]) +" captures";
+        black_captures=captures["black"];
+        white_captures=captures["white"];
         */
+
+        var black_captures =  6
+        var white_captures = 4
+
+        document.getElementById("white-captures").innerHTML = black_captures.toString() +" captures";
+        document.getElementById("black-captures").innerHTML = white_captures.toString() +" captures";
 
         MESSAGE = data.message;
     }
