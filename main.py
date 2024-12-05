@@ -281,16 +281,21 @@ def update_state():
             # if image_base64:
             image_data = base64.b64decode(image_base64)
             nparr = np.frombuffer(image_data, np.uint8)
+
+            captures = {"white":7, "black":5}
             
             # Decode the image using OpenCV
             frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-            return {'message': message, 'image' : generate_plot(frame)}
+            #return {'message': message, 'image' : generate_plot(frame)}
+            return {'message': message, 'image' : generate_plot(), 'captures':captures}
+        
         except Exception as e:
             print(e)
             return Response(status=502)
     else:
-        return {'message': message, 'image' : generate_plot()}
+        captures = {"white":7, "black":5}
+        return {'message': message, 'image' : generate_plot(), 'captures':captures}
 
 @app.route('/get_config', methods=['GET'])
 def get_config():

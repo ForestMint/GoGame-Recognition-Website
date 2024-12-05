@@ -216,3 +216,20 @@ bottom: auto;
 top: 0;
 width: 70%;
 }
+
+#black-information {
+  background-color: black;
+  color:white;
+  float:left;
+  width: 300px;
+  border-radius: 8px;
+  margin-bottom : 10px;
+}
+#white-information {
+  background-color: white;
+  color:black;
+  float:right;
+  width: 300px;
+  border-radius: 8px;
+  margin-bottom : 10px;
+}

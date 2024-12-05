@@ -143,7 +143,19 @@ async function update_state(){
         var data = await response.json();
         board.src = 'data:image/jpeg;base64,' + data.image;
         board_context.drawImage(board, 0, 0);
+        //console.log(response)
+
         
+        //console.log(data)
+        
+        //captures = data.captures;
+        
+        //console.log(captures)
+        /*
+        document.getElementById("white_captures").innerHTML = str(captures["white"]) +" captures";
+        document.getElementById("black_captures").innerHTML = str(captures["black"]) +" captures";
+        */
+
         MESSAGE = data.message;
     }
 }
