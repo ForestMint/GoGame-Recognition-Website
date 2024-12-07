@@ -73,6 +73,8 @@ def are_similar(line1, line2, threshold=10):
     bool
         true if similar, else false    
     """
+    print("<= n 1")
+
     return np.all(np.abs(line1 - line2) <= threshold)
 
 
@@ -378,6 +380,8 @@ def restore_and_remove_lines(lines, distance_threshold=10):
     distances = calculate_distances(lines)
     
     # If there are only one or fewer lines, no restoration is needed
+    print("<= n 2")
+
     if len(distances) <= 1:
         return lines
     
@@ -629,6 +633,8 @@ def get_corners_inside_box(corners_boxes, board_box):
     square_y1 = corners_boxes[:, 1]
     square_x2 = corners_boxes[:, 2]
     square_y2 = corners_boxes[:, 3]
+
+    print("<= n 3")
 
     # Check if any corner of the corners_boxes is inside the board_box
     condition = (

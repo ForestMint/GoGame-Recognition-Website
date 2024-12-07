@@ -200,6 +200,9 @@ class GoBoard:
         white_stones = get_key_points(self.results, 6, self.perspective_matrix)
 
         # Extract clusters of lines within the valid image region
+        print("cluster_1 : " + cluster_1)
+        print("cluster_1 : " + cluster_2)
+
         cluster_1 = vertical_lines[(vertical_lines <= 600).all(axis=1) & (vertical_lines >= 0).all(axis=1)]
         cluster_2 = horizontal_lines[(horizontal_lines <= 600).all(axis=1) & (horizontal_lines >= 0).all(axis=1)]
 

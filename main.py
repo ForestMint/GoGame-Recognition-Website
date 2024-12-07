@@ -293,6 +293,11 @@ def update_state():
     global message
 
     data = request.get_json()
+
+    game_uuid_str = data['game_uuid_str']
+    print(game_uuid_str)
+
+
    
     if 'image' in data:
         try:
@@ -303,7 +308,9 @@ def update_state():
             image_data = base64.b64decode(image_base64)
             nparr = np.frombuffer(image_data, np.uint8)
 
-            captures = {"white":7, "black":5}
+            game_uuid = uuid.uuid1(game_uuid_str)
+            captures = my_game_pool.get_captures(game_uuid)
+            
             
             # Decode the image using OpenCV
             frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)

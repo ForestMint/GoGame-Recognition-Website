@@ -135,7 +135,7 @@ async function update_state(){
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({ image: data }),
+                                body: JSON.stringify({ image: data , game_uuid_str: game_uuid}),
                             })
 
     if(response.status == 502){
