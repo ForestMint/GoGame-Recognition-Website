@@ -306,7 +306,9 @@ def update_state():
             # Decode the image using OpenCV
             frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-            return {'message': message, 'image' : generate_plot(frame), 'captures' : {"black" : 5, "white" : 7} }
+            captures = my_game_pool.get_captures_from_game(game_uuid_str)
+
+            return {'message': message, 'image' : generate_plot(frame), 'captures' : captures }
         except Exception as e:
             print(e)
             return Response(status=502)
