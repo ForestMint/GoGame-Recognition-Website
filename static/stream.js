@@ -2,6 +2,8 @@
 var board = new Image();
 board.src = 'static/empty_board.jpg';
 
+var game_uuid
+
 const controls = document.getElementById("controls");
 const start_button = document.getElementById("start-button");
 const stop_button = document.getElementById("stop-button");
@@ -297,8 +299,14 @@ start_button.addEventListener('click', function(event) {
             video.play();
 
             fetch('/initialize_new_game').then(function(response){
-                if(response.status == 204){
+                response.json().then(function(data){
                     console.log("New game was initialized");
+                    game_uuid = data.new_game_uuid_str 
+                    
+
+                    console.log(game_uuid)
+                    
+
 
                     QUIT = false;       
                     PAUSED = false;
@@ -316,9 +324,8 @@ start_button.addEventListener('click', function(event) {
                     video.hidden = false;
 
                     update_state_loop();
-                } else {
-                    alert("Error initializing new game, please try again");
                 }
+            )
             })
         })
         .catch(function (error) {

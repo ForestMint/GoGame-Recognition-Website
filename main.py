@@ -2,9 +2,12 @@ from ultralytics import YOLO
 from GoStreamDetection.GoGame import *
 from GoStreamDetection.GoBoard import *
 from GoStreamDetection.GoVisual import *
+from GoStreamDetection.GoGamePool import *
+ 
 from flask import Flask, render_template, Response, request, jsonify
 import cv2
 import base64
+import json
 from __init__ import app
 
 cam_index = 0
@@ -32,6 +35,8 @@ STOPPED = False
 PAUSED = False
 QUIT = False
 
+my_game_pool = GoGamePool()
+
 def new_game(transparent_mode=False):
     """
     Initialize a new game of Go by intializing all three instances of GoGame, GoVisual and GoBoard.
@@ -47,8 +52,10 @@ def new_game(transparent_mode=False):
     go_visual = GoVisual(game)
     go_board = GoBoard(model)
     go_game = GoGame(game, go_board, go_visual, transparent_mode)
+    my_game_uuid = my_game_pool.add_game(go_game)
     game_plot = empty_board
     initialized = False
+    return my_game_uuid
 
 def processing_thread(ProcessFrame=None):
     """
@@ -105,8 +112,22 @@ def initialize_new_game():
     Returns:
         None
     """
-    new_game()
-    return Response(status=204)
+    new_game_uuid=new_game()
+    #return json.dumps({'new_game_uuid':new_game_uuid}), 204
+    data = {'new_game_uuid_str':str(new_game_uuid)}
+    #return Response(response = jsonify(data), status=204)
+    #return Response(status=204)
+    
+    return jsonify(data)
+
+
+
+    response = app.response_class(
+        response=json.dumps(data),
+        status=201,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route('/set_rules', methods=["POST"])
 def set_rules():
