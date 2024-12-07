@@ -279,8 +279,11 @@ start_button.addEventListener('click', function(event) {
             video.play();
 
             fetch('/initialize_new_game').then(function(response){
-                if(response.status == 204){
-                    console.log("New game was initialized");
+                response.json().then(function(data){
+
+                    
+                    console.log("New game was initialized");$
+                    console.log(data.new_game_uuid_str)
 
                     QUIT = false;       
                     PAUSED = false;
@@ -298,9 +301,8 @@ start_button.addEventListener('click', function(event) {
                     video.hidden = false;
 
                     update_state_loop();
-                } else {
-                    alert("Error initializing new game, please try again");
-                }
+                })
+
             })
         })
         .catch(function (error) {

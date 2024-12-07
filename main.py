@@ -2,6 +2,7 @@ from ultralytics import YOLO
 from GoStreamDetection.GoGame import *
 from GoStreamDetection.GoBoard import *
 from GoStreamDetection.GoVisual import *
+from GoStreamDetection.GoGamePool import *
 from flask import Flask, render_template, Response, request, jsonify
 import cv2
 import base64
@@ -31,6 +32,8 @@ STARTED = False
 STOPPED = False
 PAUSED = False
 QUIT = False
+
+my_game_pool = GoGamePool()
 
 def new_game(transparent_mode=False):
     """
@@ -105,8 +108,17 @@ def initialize_new_game():
     Returns:
         None
     """
-    new_game()
-    return Response(status=204)
+
+
+
+
+    new_game_uuid=new_game()
+    #return json.dumps({'new_game_uuid':new_game_uuid}), 204
+    data = {'new_game_uuid_str':str(new_game_uuid)}
+    #return Response(response = jsonify(data), status=204)
+    #return Response(status=204)
+    
+    return jsonify(data)
 
 @app.route('/set_rules', methods=["POST"])
 def set_rules():
