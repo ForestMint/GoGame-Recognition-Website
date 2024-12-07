@@ -53,6 +53,14 @@ def new_game(transparent_mode=False):
     game_plot = empty_board
     initialized = False
 
+
+
+
+    my_game_uuid = my_game_pool.add_game(go_game)
+
+    return my_game_uuid
+
+
 def processing_thread(ProcessFrame=None):
     """
     Process the detection algorithm
