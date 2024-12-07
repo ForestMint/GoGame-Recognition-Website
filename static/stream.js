@@ -2,6 +2,8 @@
 var board = new Image();
 board.src = 'static/empty_board.jpg';
 
+var game_uuid
+
 const controls = document.getElementById("controls");
 const start_button = document.getElementById("start-button");
 const stop_button = document.getElementById("stop-button");
@@ -133,7 +135,7 @@ async function update_state(){
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({ image: data }),
+                                body: JSON.stringify({ image: data,  str_uuid : game_uuid}),
                             })
 
     if(response.status == 502){
@@ -143,6 +145,8 @@ async function update_state(){
         var data = await response.json();
         board.src = 'data:image/jpeg;base64,' + data.image;
         board_context.drawImage(board, 0, 0);
+
+        console.log(data.captures['black'])
         
         MESSAGE = data.message;
     }
@@ -284,6 +288,8 @@ start_button.addEventListener('click', function(event) {
                     
                     console.log("New game was initialized");$
                     console.log(data.new_game_uuid_str)
+
+                    game_uuid = data.new_game_uuid_str
 
                     QUIT = false;       
                     PAUSED = false;

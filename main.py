@@ -296,6 +296,7 @@ def update_state():
     if 'image' in data:
         try:
             image_data_url = data['image']
+            game_uuid_str = data['str_uuid']
             # Extract the base64-encoded image data
             _, image_base64 = image_data_url.split(',')
             # if image_base64:
@@ -305,7 +306,7 @@ def update_state():
             # Decode the image using OpenCV
             frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-            return {'message': message, 'image' : generate_plot(frame)}
+            return {'message': message, 'image' : generate_plot(frame), 'captures' : {"black" : 5, "white" : 7} }
         except Exception as e:
             print(e)
             return Response(status=502)
