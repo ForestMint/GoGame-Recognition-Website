@@ -1,4 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <script>
+        function validateCreateGameForm() {
+           var gameName = document.getElementById("game_name").value;
+           var gameLocation = document.getElementById("game_location").value;
+
+           var whiteFirstName = document.getElementById("white-first-name").value;
+           var whitelastName = document.getElementById("white-last-name").value;
+           var whiteRank = document.getElementById("whiteRank-select").value;
+
+           var blackFirstName = document.getElementById("black-first-name").value;
+           var blackLastName = document.getElementById("black-last-name").value;
+           var blackRank = document.getElementById("blackRank-select").value;
+
+           var boardSize = document.getElementById("size-select").value;
+           var gameRules = document.getElementById("rules-select").value;
+           var handicap = document.getElementById("handicap-select").value;
+           var komi = document.getElementById("komi").value;
+
+           //console.log(whiteFirstName)
+
+           
+        }
+
+        function toggleSkipGameInformationButton(){
+            var gameInformationToBeSkipped = document.getElementById("skip-game-information-button").checked;
+            //console.log(gameInformationToBeSkipped)
+
+
+
+            if (gameInformationToBeSkipped) {
+                document.getElementById("game-information").style.visibility = "hidden"; 
+            } else {
+                document.getElementById("game-information").style.visibility = "visible"; 
+            }        
+
+        }
+      </script>
+
+
+
+
 <form>
+
+
+
+    <!-- Rounded switch -->
+    <label class="switch">
+        <input type="checkbox" id ="skip-game-information-button"  onclick = "toggleSkipGameInformationButton()">
+        <span class="slider round">Skip game information</span>
+    </label>
+
+
+    
+    <fieldset  id ="game-information">
+        <legend>Game information:</legend>
+    
+    
     <label for="game_name">Game name:</label><br>
     <input type="text" id="game_name" name="game_name"><br>
     <label for="game_location">Game location:</label><br>
@@ -8,16 +69,131 @@
 
     <fieldset>
         <legend>White:</legend>
-        First name: <input type="text"><br>
-        Last name: <input type="text"><br>
-        Rank: <input type="text">
+        First name: <input id="white-first-name" type="text"><br>
+        Last name: <input id="white-last-name" type="text"><br>
+
+
+
+
+        <label for="whiteRank-select">Rank:</label>
+        <select name="whiteRank" id="whiteRank-select">
+        <option value="">--Please choose an option--</option>
+        <option value="?">?</option>
+        <option value="30k">30k</option>
+        <option value="29k">29k</option>
+        <option value="28k">28k</option>
+        <option value="27k">27k</option>
+        <option value="26k">26k</option>
+        <option value="25k">25k</option>
+        <option value="24k">24k</option>
+        <option value="23k">23k</option>
+        <option value="22k">22k</option>
+        <option value="21k">21k</option>
+        <option value="20k">20k</option>
+        <option value="19k">19k</option>
+        <option value="18k">18k</option>
+        <option value="17k">17k</option>
+        <option value="16k">16k</option>
+        <option value="15k">15k</option>
+        <option value="14k">14k</option>
+        <option value="13k">13k</option>
+        <option value="12k">12k</option>
+        <option value="11k">11k</option>
+        <option value="10k">10k</option>
+        <option value="9k">9k</option>
+        <option value="8k">8k</option>
+        <option value="7k">7k</option>
+        <option value="6k">6k</option>
+        <option value="5k">5k</option>
+        <option value="4k">4k</option>
+        <option value="3k">3k</option>
+        <option value="2k">2k</option>
+        <option value="1k">1k</option>
+
+        <option value="1d">1d</option>
+        <option value="2d">2d</option>
+        <option value="3d">3d</option>
+        <option value="4d">4d</option>
+        <option value="5d">5d</option>
+        <option value="6d">6d</option>
+        <option value="7d">7d</option>
+        <option value="1p">1p</option>
+        <option value="2p">2p</option>
+        <option value="3p">3p</option>
+        <option value="4p">4p</option>
+        <option value="5p">5p</option>
+        <option value="6p">6p</option>
+        <option value="7p">7p</option>
+        <option value="8p">8p</option>
+        <option value="9p">9p</option>
+        </select><br>
+
+
+
     </fieldset>
     <br>
     <fieldset>
         <legend>Black:</legend>
-        First name: <input type="text"><br>
-        Last name: <input type="text"><br>
-        Rank: <input type="text">
+
+
+        First name: <input id="black-first-name" type="text"><br>
+        Last name: <input id="black-last-name" type="text"><br>
+
+
+        <label for="blackRank-select">Rank:</label>
+        <select name="blackRank" id="blackRank-select">
+        <option value="">--Please choose an option--</option>
+        <option value="?">?</option>
+        <option value="30k">30k</option>
+        <option value="29k">29k</option>
+        <option value="28k">28k</option>
+        <option value="27k">27k</option>
+        <option value="26k">26k</option>
+        <option value="25k">25k</option>
+        <option value="24k">24k</option>
+        <option value="23k">23k</option>
+        <option value="22k">22k</option>
+        <option value="21k">21k</option>
+        <option value="20k">20k</option>
+        <option value="19k">19k</option>
+        <option value="18k">18k</option>
+        <option value="17k">17k</option>
+        <option value="16k">16k</option>
+        <option value="15k">15k</option>
+        <option value="14k">14k</option>
+        <option value="13k">13k</option>
+        <option value="12k">12k</option>
+        <option value="11k">11k</option>
+        <option value="10k">10k</option>
+        <option value="9k">9k</option>
+        <option value="8k">8k</option>
+        <option value="7k">7k</option>
+        <option value="6k">6k</option>
+        <option value="5k">5k</option>
+        <option value="4k">4k</option>
+        <option value="3k">3k</option>
+        <option value="2k">2k</option>
+        <option value="1k">1k</option>
+
+        <option value="1d">1d</option>
+        <option value="2d">2d</option>
+        <option value="3d">3d</option>
+        <option value="4d">4d</option>
+        <option value="5d">5d</option>
+        <option value="6d">6d</option>
+        <option value="7d">7d</option>
+        <option value="1p">1p</option>
+        <option value="2p">2p</option>
+        <option value="3p">3p</option>
+        <option value="4p">4p</option>
+        <option value="5p">5p</option>
+        <option value="6p">6p</option>
+        <option value="7p">7p</option>
+        <option value="8p">8p</option>
+        <option value="9p">9p</option>
+        </select><br>
+
+
     </fieldset>
 
     <label for="size-select">Size:</label>
@@ -53,7 +229,17 @@
 
 
     <label for="komi">Komi:</label><br>
-    <input type="text" id="komi" name="komi">
+    <input type="text" id="komi" name="komi"><br>
+
+    </fieldset>
+
+    <button type="validate_button"   onclick="validateCreateGameForm()"     >Validate</button> 
 
 
   </form> 
+
+
+
+</body>
+
+</html>
