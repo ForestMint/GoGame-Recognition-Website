@@ -2,7 +2,7 @@ from ultralytics import YOLO
 from GoStreamDetection.GoGame import *
 from GoStreamDetection.GoBoard import *
 from GoStreamDetection.GoVisual import *
-from flask import Flask, render_template, Response, request, jsonify
+from flask import Flask, render_template, Response, request, jsonify, redirect
 import cv2
 import base64
 from __init__ import app
@@ -423,14 +423,14 @@ def sgf():
     """
         Route to get to the streaming page in transparent mode
     """
-    new_game()
-    return render_template("sgf.html")
+    #new_game()
+    return redirect("/home")
 
 @app.route('/historique')
 def historique():
     """
         Route to get to the summary page
     """
-    return render_template("Historique.html")
+    return redirect("/home")
 
 
