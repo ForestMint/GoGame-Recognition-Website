@@ -23,7 +23,16 @@ class GoGamePool():
 
         #print(sente_package_game.score())
 
-        print(sente_package_game.get_winner())
+        #print(sente_package_game.get_winner())
+        #print(sente_package_game.get_result())
+        #print(sente_package_game.get_handicap())
+        print(sente_package_game.get_properties())
+        #print(sente_package_game.get_properties()['RE'])
+        #print(sente_package_game.get_properties()['HD'])
+
+
+
+        
 
 
 
