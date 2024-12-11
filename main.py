@@ -415,8 +415,9 @@ def play():
     """
     Route to get to the streaming page in game mode
     """
-    new_game()
-    return render_template("play.html")
+    #new_game()
+    #return render_template("play.html")
+    return redirect("/home")
 
 @app.route('/sgf')
 def sgf():
