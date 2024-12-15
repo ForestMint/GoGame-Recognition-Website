@@ -6,6 +6,13 @@ from flask import Flask, render_template, Response, request, jsonify, redirect
 import cv2
 import base64
 from __init__ import app
+import logging
+logging.basicConfig(
+    filename='scrapper.log', 
+    level = logging.DEBUG,
+    format = '%(asctime)s - %(message)s ', 
+    datefmt = '%d-%b-%y %H:%M:%S'
+    )
 
 cam_index = 0
 
