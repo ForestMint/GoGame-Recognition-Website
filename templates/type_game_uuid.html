@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Type Game Identifier{% endblock %}
+
+{% block content %}
+
+    <div class="container py-4">
+        <form>
+            <label for="gameuuid">Game identifier:</label><br>
+            <input type="text" id="gameuuid" name="gameuuid" value=""><br><br>
+            <input id="validate_button" type="submit" value="Validate" onclick="validate_uuid();">
+        </form> 
+
+    </div> 
+{% endblock %}
+{% block js %}<script>
+function validate_uuid() {
+    console.log(document.getElementById("gameuuid").value);
+
+
+
+
+    
+}
+</script>{% endblock %}

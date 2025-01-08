@@ -296,10 +296,12 @@ start_button.addEventListener('click', function(event) {
             fetch('/initialize_new_game').then(function(response){
 
                 response.json().then(function(data){
-                    console.log(data)
-                    GAME_UUID=data.new_game_uuid
-                
+                    //console.log(data)
+                    GAME_UUID=data.new_game_uuid;
+                    //GAME_UUID_FOR_STREAMERS=data.game_uuid_for_streamers
+                    document.getElementById('game_identifier_value').innerHTML  = data.new_game_uuid_for_streamers;
                     console.log("New game was initialized");
+                    //console.log(data.new_game_uuid_for_streamers);
 
                     QUIT = false;       
                     PAUSED = false;

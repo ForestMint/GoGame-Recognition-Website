@@ -58,10 +58,10 @@ def new_game(transparent_mode=False):
     go_board = GoBoard(model)
     go_game = GoGame(game, go_board, go_visual, transparent_mode)
 
-    my_new_game_uuid = my_go_game_pool.add_game(go_game)
+    my_new_game_uuid, my_new_game_uuid_for_streamers = my_go_game_pool.add_game(go_game)
     game_plot = empty_board
     initialized = False
-    return my_new_game_uuid
+    return my_new_game_uuid, my_new_game_uuid_for_streamers
 
 def processing_thread(ProcessFrame=None, game_uuid = None):
     """
@@ -119,11 +119,11 @@ def initialize_new_game():
     Returns:
         None
     """
-    new_game_uuid=new_game()
-    res = {'new_game_uuid': new_game_uuid}
-    print(res)
+    new_game_uuid, new_game_uuid_for_streamers=new_game()
+    res = {'new_game_uuid': new_game_uuid, 'new_game_uuid_for_streamers' : new_game_uuid_for_streamers}
+    #print(res)
     return res
-    return Response(status=204)
+    #return Response(status=204)
 
 @app.route('/set_rules', methods=["POST"])
 def set_rules():
@@ -429,6 +429,12 @@ def stream():
     """
     return render_template("stream.html")
 
+@app.route('/type_game_uuid')
+def type_game_uuid():
+    """
+    Route to get to the streaming page in game mode
+    """
+    return render_template("type_game_uuid.html")
 
 @app.route('/play')
 def play():
@@ -453,5 +459,13 @@ def historique():
         Route to get to the summary page
     """
     return redirect("/home")
+
+@app.route('/validate_streamer_game_uuid', methods=['POST'])
+def validate_streamer_game_uuid():
+
+    data = request.get_json()
+    #print(data)
+    streamer_game_uuid = data['streamer_game_uuid'] 
+    return my_go_game_pool.fetch_streamer_game_uuid(streamer_game_uuid)
 
 
