@@ -1,3 +1,4 @@
+/*
 "use strict";
 
 var board = new Image();
@@ -118,12 +119,12 @@ controls.addEventListener('click', function(event) {
     });
 });
 
-function update_state(){
+function update_state(game_uuid){
 
     fetch('/update_state', {
         method: 'POST',
         headers: {'Content-Type': 'application/json',},
-        body: JSON.stringify({}),
+        body: JSON.stringify({'game_uuid':game_uuid}),
     }).then(function(response){
         response.json().then(function(data){
             board.src = 'data:image/jpeg;base64,' + data.image;
@@ -229,3 +230,4 @@ function get_closest_intersection(x, y){
 
     return [stonex, stoney, posx, posy];
 }
+*/

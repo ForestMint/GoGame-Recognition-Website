@@ -1,3 +1,4 @@
+/*
 "use strict";
 
 const controls = document.getElementById("controls");
@@ -41,14 +42,15 @@ load_form.addEventListener("submit", function(event) {
 });
 
 
-async function update_state(){
+async function update_state(game_uuid){
     const response = await fetch('/update_state', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({}),
+                                body: JSON.stringify({'game_uuid':game_uuid}),
                             });
     data = await response.json();
     image.src = 'data:image/jpeg;base64,' + data.image;
 }
+*/

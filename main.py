@@ -2,6 +2,7 @@ from ultralytics import YOLO
 from GoStreamDetection.GoGame import *
 from GoStreamDetection.GoBoard import *
 from GoStreamDetection.GoVisual import *
+from GoStreamDetection.GoGamePool import *
 from flask import Flask, render_template, Response, request, jsonify, redirect
 import cv2
 import base64
@@ -13,6 +14,8 @@ logging.basicConfig(
     format = '%(asctime)s - %(message)s ', 
     datefmt = '%d-%b-%y %H:%M:%S'
     )
+
+my_go_game_pool = GoGamePool()
 
 cam_index = 0
 
@@ -54,10 +57,13 @@ def new_game(transparent_mode=False):
     go_visual = GoVisual(game)
     go_board = GoBoard(model)
     go_game = GoGame(game, go_board, go_visual, transparent_mode)
+
+    my_new_game_uuid = my_go_game_pool.add_game(go_game)
     game_plot = empty_board
     initialized = False
+    return my_new_game_uuid
 
-def processing_thread(ProcessFrame=None):
+def processing_thread(ProcessFrame=None, game_uuid = None):
     """
     Process the detection algorithm
     
@@ -71,16 +77,16 @@ def processing_thread(ProcessFrame=None):
     if not ProcessFrame is None:
         try:
             if not initialized:
-                game_plot, sgf_text = go_game.initialize_game(ProcessFrame)
+                game_plot, sgf_text = my_go_game_pool.get_game(game_uuid).initialize_game(ProcessFrame)
                 initialized = True
                 message = usual_message
             else:    
-                game_plot, sgf_text = go_game.main_loop(ProcessFrame)
+                game_plot, sgf_text = my_go_game_pool.get_game(game_uuid).main_loop(ProcessFrame)
                 message = usual_message
         except Exception as e:
             message = str(e)
                 
-def generate_plot(frame=None):
+def generate_plot(frame=None, game_uuid=None):
     """
     Generate a plot representing the game
     
@@ -89,12 +95,13 @@ def generate_plot(frame=None):
     """
     global game_plot
 
-    processing_thread(frame)
+    processing_thread(frame, game_uuid)
     ###### condition deja implementé dans gogame? A revoir
     if transparent_mode and not frame is None:
         to_plot = game_plot
     else:
-        to_plot = go_game.go_visual.current_position()
+        #to_plot = go_game.go_visual.current_position()
+        to_plot = my_go_game_pool.get_game(game_uuid).go_visual.current_position()
     
     _, img_encoded = cv2.imencode('.jpg', to_plot)
     img_base64 = base64.b64encode(img_encoded).decode('utf-8')
@@ -112,7 +119,10 @@ def initialize_new_game():
     Returns:
         None
     """
-    new_game()
+    new_game_uuid=new_game()
+    res = {'new_game_uuid': new_game_uuid}
+    print(res)
+    return res
     return Response(status=204)
 
 @app.route('/set_rules', methods=["POST"])
@@ -279,9 +289,12 @@ def update_state():
     global message
 
     data = request.get_json()
+    #print(data)
+    game_uuid = data['my_game_uuid'] 
    
     if 'image' in data:
         try:
+            
             image_data_url = data['image']
             # Extract the base64-encoded image data
             _, image_base64 = image_data_url.split(',')
@@ -292,7 +305,7 @@ def update_state():
             # Decode the image using OpenCV
             frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-            return {'message': message, 'image' : generate_plot(frame)}
+            return {'message': message, 'image' : generate_plot(frame, game_uuid)}
         except Exception as e:
             print(e)
             return Response(status=502)

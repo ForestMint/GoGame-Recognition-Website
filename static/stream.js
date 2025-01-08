@@ -2,6 +2,8 @@
 var board = new Image();
 board.src = 'static/unknown_board.jpg';
 
+const game_uuid = ""
+
 const controls = document.getElementById("controls");
 const start_button = document.getElementById("start-button");
 const stop_button = document.getElementById("stop-button");
@@ -43,6 +45,8 @@ var STOPPED = false;
 var PAUSED = false;
 var QUIT = false;
 
+var GAME_UUID = ""
+
 var MESSAGE = "Nothing is being streamed";
 
 var selectedStone = {x: null, y:null, posx: null, posy: null};
@@ -73,7 +77,7 @@ fetch("/get_config").then(function(response){
         QUIT = data.QUIT;        
         if(STOPPED){
             console.log("stopped");
-            update_state();
+            update_state(GAME_UUID);
             start_button.disabled = false;
             stop_button.disabled = true;
             pause_button.disabled = true;
@@ -97,7 +101,7 @@ fetch("/get_config").then(function(response){
                     camera_feed_closed.hidden = true;
                     if(PAUSED){
                         console.log("pause");
-                        update_state();
+                        update_state(GAME_UUID);
                         start_button.disabled = true;
                         stop_button.disabled = false;
                         pause_button.disabled = false;
@@ -117,7 +121,9 @@ fetch("/get_config").then(function(response){
     })
 })
 
-async function update_state(){
+async function update_state(game_uuid){
+    //game_uuid = "toto"
+    console.log(game_uuid)
     var video_height = video.videoHeight;
     var video_width = video.videoWidth;
     var width = video_width;
@@ -127,13 +133,18 @@ async function update_state(){
     video_context.drawImage(video, 0, 0, width, height);
     var data = video_canvas.toDataURL('image/jpeg', 0.5);
     video_context.clearRect(0, 0, width, height);
+    var data_dict = { 'image': data , 'game_uuid':game_uuid};
+    var baba = { x: 5, y: 6 };
+    var bobo = {image: data, my_game_uuid : game_uuid};
+    console.log(bobo);
+    console.log(JSON.stringify(bobo))
 
     var response = await fetch('/update_state', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify({ image: data }),
+                                body: JSON.stringify(bobo),
                             })
 
     if(response.status == 502){
@@ -143,13 +154,14 @@ async function update_state(){
         var data = await response.json();
         board.src = 'data:image/jpeg;base64,' + data.image;
         board_context.drawImage(board, 0, 0);
+        game_uuid = data.game_uuid
         
         MESSAGE = data.message;
     }
 }
 
 function update_state_loop() {
-    update_state().then(() => {
+    update_state(GAME_UUID).then(() => {
         // Schedule the next execution after the asynchronous operation is complete
         if(!QUIT){
             updateLoop = setTimeout(update_state_loop, 0);
@@ -175,7 +187,7 @@ controls.addEventListener('click', function(event) {
         body: target,
     }).then(function(response) {
         if(response.status == 204){
-            update_state()
+            update_state(GAME_UUID)
         }
     });
 });
@@ -187,7 +199,7 @@ undo_button.addEventListener('click', function(event) {
     }).then(function(response) {
         if (response.status === 204) {
             console.log("Undone");
-            update_state()
+            update_state(GAME_UUID)
         }
         else {
             message_container.textContent = "There are no moves left";
@@ -271,15 +283,22 @@ download_sgf_button.addEventListener("click", function() {
 start_button.addEventListener('click', function(event) {
     event.preventDefault();
     console.log("start");
-    
+
     if (navigator.mediaDevices.getUserMedia) {
+
+
+
         navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
             video.srcObject = stream;
             video.play();
 
             fetch('/initialize_new_game').then(function(response){
-                if(response.status == 204){
+
+                response.json().then(function(data){
+                    console.log(data)
+                    GAME_UUID=data.new_game_uuid
+                
                     console.log("New game was initialized");
 
                     QUIT = false;       
@@ -298,11 +317,15 @@ start_button.addEventListener('click', function(event) {
                     video.hidden = false;
 
                     update_state_loop();
-                } else {
-                    alert("Error initializing new game, please try again");
-                }
+                })
             })
         })
+
+
+
+
+
+
         .catch(function (error) {
             alert('Video feed failed to start');
         });
@@ -407,7 +430,7 @@ hover_canvas.addEventListener('mousedown', function(event) {
                                     targetStone: [targetStone.x, targetStone.y]}),
         }).then(function(response){
             if(response.status == 204){
-                update_state();
+                update_state(GAME_UUID);
                 Object.keys(selectedStone).forEach(key => selectedStone[key]=null);
                 Object.keys(targetStone).forEach(key => targetStone[key]=null);
                 hover_context.clearRect(0, 0, hover_canvas.width, hover_canvas.height);
