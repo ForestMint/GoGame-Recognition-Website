@@ -14,9 +14,62 @@
     </div> 
 {% endblock %}
 {% block js %}<script>
-function validate_uuid() {
-    console.log(document.getElementById("gameuuid").value);
+async function validate_uuid() {
+    my_streamer_game_uuid = document.getElementById("gameuuid").value;
+    //window.alert(my_streamer_game_uuid);
+    //console.log(document.getElementById("gameuuid").value);
 
+    /*
+    window.alert("bobo");
+    fetch('/validate_streamer_game_uuid', {
+        method: 'POST',
+        //body: JSON.stringify({streamer_game_uuid: my_streamer_game_uuid}),
+        body: JSON.stringify({streamer_game_uuid: 'toto'}),
+
+    }).then(response => console.log(response.status) || response) // output the status and return response
+    */
+    /*
+    }).then(function(response){
+        response.json().then(function(data){
+            window.alert("bobo");
+        })
+    })
+    */
+
+    //fetch('/validate_streamer_game_uuid',{method: 'POST',body: JSON.stringify({streamer_game_uuid: 413}),})
+    var response = await fetch('/validate_streamer_game_uuid',{
+        method: 'POST',
+        headers: {
+                'Content-Type': 'application/json',
+            },
+        body: JSON.stringify({streamer_game_uuid: my_streamer_game_uuid}),
+    })
+    if(response.status == 502){
+        console.log('Update failed');
+        return;
+    } else {
+        var data = await response.json();
+        window.alert(data.result);
+    }
+
+
+
+
+
+
+
+    /*
+    .then((response) => {
+        var data = await response.json();
+        console.log('titi');
+        window.alert('titi');
+        windows.alert(response);
+        //return response.json();
+    })
+    .then((data) => {
+        
+    })
+    */
 
 
 
