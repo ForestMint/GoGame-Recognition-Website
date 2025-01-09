@@ -1,47 +1,55 @@
+import threading
+import copy
 from ultralytics import YOLO
-from GoStreamDetection.GoGame import *
-from GoStreamDetection.GoBoard import *
-from GoStreamDetection.GoVisual import *
-from flask import Flask, render_template, Response, request, jsonify
+from GoGame import *
+from GoBoard import *
+from GoVisual import *
+from flask import Flask, render_template, Response, request
 import cv2
 import base64
-from __init__ import app
+import time
 
-cam_index = 0
+import recup_os
 
-model = YOLO('GoStreamDetection/model.pt')
+#cam_index = 0
+def find_camera_index():
+    index = 0
+    while True:
+        cap = cv2.VideoCapture(index)
+        if cap.read()[0]:
+            cap.release()
+            return index
+        cap.release()
+        index += 1
 
-usual_message = "Everything is well detected"
-message = "Nothing is being streamed for the moment"
-defaut_turn = "No game is being played at the moment"
-resigned = False
+cam_index = find_camera_index()
+
+app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'your_secret_key'  
+
+
+
+model = YOLO('model.pt')
+
+usual_message = "La caméra est bien fixée et tout est Ok"
+message = "Rien n'a encore été lancé "
+disabled_button = 'stop-button'
+
 
 ProcessFrame = None
 Process = True
 initialized = False
 sgf_text = None
-empty_board = cv2.imread("static/empty_board.jpg")
+empty_board = cv2.imread("empty_board.jpg")
 game_plot = empty_board
 process_thread = None
 go_game = None
 transparent_mode = False
-camera = None
+endGame = False
 
-STARTED = False
-STOPPED = False
-PAUSED = False
-QUIT = False
 
-def new_game(transparent_mode=False):
-    """
-    Initialize a new game of Go by intializing all three instances of GoGame, GoVisual and GoBoard.
+def New_game(transparent_mode=False):
     
-    Args:
-        transparent_mode (bool): If True, the board will be transparent.
-        
-    Returns:
-        None
-    """
     global go_game, initialized, game_plot
     game = sente.Game()
     go_visual = GoVisual(game)
@@ -50,41 +58,40 @@ def new_game(transparent_mode=False):
     game_plot = empty_board
     initialized = False
 
-def processing_thread(ProcessFrame=None):
+def processing_thread():
     """
-    Process the detection algorithm
+        Process the detection algorithm
+        
+        Update:
+            game_plot, sgf_text
+        Send error to message if there is one
+        """
     
-    Update:
-        game_plot, sgf_text
-    Send error to message if there is one
-    """
-    
-    global game_plot, message, initialized, sgf_text
+    global ProcessFrame, game_plot, message, initialized, sgf_text
 
     if not ProcessFrame is None:
         try:
             if not initialized:
-                game_plot, sgf_text = go_game.initialize_game(ProcessFrame)
+                game_plot, sgf_text = go_game.initialize_game(ProcessFrame, endGame)
                 initialized = True
                 message = usual_message
             else:    
-                game_plot, sgf_text = go_game.main_loop(ProcessFrame)
+                game_plot, sgf_text = go_game.main_loop(ProcessFrame, endGame)
                 message = usual_message
         except Exception as e:
-            message = str(e)
+            message = "Erreur : "+str(e)
                 
-def generate_plot(frame=None):
+def generate_plot():
     """
-    Generate a plot representing the game
-    
-    Returns:
-        Image
-    """
+        Generate a plot representing the game
+        
+        Returns:
+            Image
+        """
     global game_plot
-
-    processing_thread(frame)
-    ###### condition deja implementé dans gogame? A revoir
-    if transparent_mode and not frame is None:
+    
+    processing_thread()
+    if transparent_mode:
         to_plot = game_plot
     else:
         to_plot = go_game.go_visual.current_position()
@@ -94,174 +101,31 @@ def generate_plot(frame=None):
 
     return img_base64
 
-@app.route('/initialize_new_game')
-def initialize_new_game():
-    """
-    Initializes a new game of Go.
+# def end_camera():
+#     global process_thread, camera_running, disabled_button
+#     if camera_running:
+#         process_thread.join()  # Wait for the thread to finish before stopping
+#         camera_running = False
+#         disabled_button = 'stop-button'   # Define the ID of the button to desactivate
+
+# def open_camera():
+#     """Open the camera"""
+#     global camera, process_thread, disabled_button, camera_running
+#     if not camera_running:
+#         camera = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
+#         process_thread = threading.Thread(target=processing_thread, args=(camera,))
+#         process_thread.start()
+#         camera_running = True
+#         disabled_button = 'start-button'  # Define the ID of the button to desactivate
+
+@app.route('/')
+def index():
+    """Route to display HTML page"""
     
-    Args:
-        None
-        
-    Returns:
-        None
-    """
-    new_game()
-    return Response(status=204)
+    return render_template('home.html', disabled_button=disabled_button)
 
-@app.route('/set_rules', methods=["POST"])
-def set_rules():
-    """
-    Button to set transparent/free or game mode.
-    
-    Args:
-        None
-        
-    Returns:
-        Response: A response object with status code 204 if successful, or status code 502 if there is an error.
-    """
-    global transparent_mode, go_game
-    try:
-        data = request.get_json()
-        transparent_mode = data["TRANSPARENT_MODE"]
-        go_game.set_transparent_mode(transparent_mode)
-        return Response(status=204)
-    except Exception as e:
-        return Response(status=502)
-
-@app.route('/start_play', methods=['POST'])
-def start_play():
-    """
-    Button to start a new game of Go by initializing GoGame, GoBoard and GoVisual instances.
-    
-    Args:
-        None
-        
-    Returns:
-        Response: A response object with status code 204.
-    """
-    new_game()
-    return Response(status=204)
-
-@app.route('/play_stone', methods=['POST'])
-def play_stone():
-    """
-    Play a stone on the Go board. Takes the coordinates from a click on the board and sends them to GoGame.
-    
-    Args:
-        None
-        
-    Returns:
-        Response: A response object with status code 204.
-    """
-    x = int(request.args.get('x'))
-    y = int(request.args.get('y'))
-    go_game.play_a_move(x, y)
-
-    return Response(status=204)
-
-@app.route('/turn', methods=['GET'])
-def show_turn():
-    """
-    Return whose turn to play if the game is still not over. Else, return who won, precising if it's a win by opponent resigning.
-    
-    Args:
-        None
-        
-    Returns:
-        dict: A dictionary containing the current turn of the game.
-    """
-    global turn 
-        
-    if go_game.is_over() and resigned == False:
-        turn = str(go_game.get_winner()) + " wins."
-        
-    elif go_game.is_over() and resigned == True:
-        if str(go_game.get_winner()) == "BLACK":
-            turn = "WHITE resigned. BLACK wins."
-        elif str(go_game.get_winner()) == "WHITE":
-            turn = "BLACK resigned. WHITE wins."
-    else:
-        turn = str(go_game.current_turn()) + " to play"
-
-    return {'turn': turn}
-
-@app.route('/correct', methods=['POST'])
-def correct():
-    """
-    Correct the position of a stone in a Go game.
-    It receives a POST request with JSON data containing the selected stone and target stone.
-
-    Args:
-        None. The function gets data from the POST request.
-
-    Returns:
-        A Response object with a status code. 
-        204: The correction was successful.
-        502: The correction was not possible or an error occurred.
-
-    Raises:
-        Exception: An error occurred while correcting the stone position.
-    """
-    
-    data = request.get_json()
-
-    if 'selectedStone' in data:
-        try:
-            selected_stone = data['selectedStone']
-            target_stone = data['targetStone']
-
-            go_game.correct_stone(selected_stone, target_stone)
-            return Response(status=204)
-        except Exception as e:
-            print("Correction is not possible")
-            return Response(status=502)
-    return Response(status=502)
-    
-@app.route('/resign', methods=['POST'])
-def resign():
-    """
-    This function handles the resignation of a player in a Go game.
-    It receives a POST request and calls the resign method of the go_game object.
-    If the resignation is successful, it sets the global variable 'resigned' to True and returns a 204 status code.
-    If an error occurs, it returns a 502 status code.
-
-    Args:
-        None. The function does not take any arguments.
-
-    Returns:
-        A Response object with a status code. 
-        204: The resignation was successful.
-        502: An error occurred during the resignation process.
-
-    """
-    global resigned
-    try:
-        go_game.resign()
-        resigned = True
-        return Response(status=204)
-    except Exception as e:
-        print(e)
-        return Response(status=502)
-    
-
-@app.route('/win', methods=['GET'])
-def winner():
-    """
-    This function returns the winner of a Go game.
-    It receives a GET request and calls the get_winner method of the go_game object.
-    It returns a dictionary with the key 'winner' and the value being the winner of the game.
-
-    Args:
-        None. The function does not take any arguments.
-
-    Returns:
-        A dictionary with the key 'winner' and the value being the winner of the game.
-    """
-    return {"winner": str(go_game.get_winner())}
-
-
-@app.route('/update_state', methods=["POST"])
-def update_state():
+@app.route('/update')
+def afficher_message():
     """
         Route to update the image and the message to display 
         
@@ -269,163 +133,248 @@ def update_state():
             message
             image
     """
-    global message
 
-    data = request.get_json()
-   
-    if 'image' in data:
+    return {'message': message, 'image' : generate_plot()}
+
+def generate_frames():
+    """
+        Generate an image from the video stream
+        
+        Returns:
+            Image
+    """
+    global ProcessFrame, camera
+    while True:  
         try:
-            image_data_url = data['image']
-            # Extract the base64-encoded image data
-            _, image_base64 = image_data_url.split(',')
-            # if image_base64:
-            image_data = base64.b64decode(image_base64)
-            nparr = np.frombuffer(image_data, np.uint8)
+            success, frame = camera.read()  # Read the image from the camera
+            if not success:
+                break
             
-            # Decode the image using OpenCV
-            frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-            return {'message': message, 'image' : generate_plot(frame)}
-        except Exception as e:
-            print(e)
-            return Response(status=502)
-    else:
-        return {'message': message, 'image' : generate_plot()}
-
-@app.route('/get_config', methods=['GET'])
-def get_config():
-    """
-    This function returns the configuration set of a Go game.
-    It receives a GET request and returns a dictionary with the game's configuration set.
-    The configuration set includes the states 'STARTED', 'STOPPED', 'PAUSED', and 'QUIT'.
-
-    Args:
-        None. The function does not take any arguments.
-
-    Returns:
-        A dictionary with the game's configuration set.
-    """
-    global STARTED, STOPPED
-    config_set = {'STARTED': STARTED, 'STOPPED': STOPPED, "PAUSED": PAUSED, "QUIT": QUIT}
-    return jsonify(config_set)
-
-@app.route('/set_config', methods=['POST'])
-def set_config():
-    """
-    This function sets the configuration of a Go game.
-    It receives a POST request with JSON data containing the game's configuration set.
-    The configuration set includes the states 'STARTED', 'STOPPED', 'PAUSED', and 'QUIT'.
-    If the configuration is set successfully, it returns a 204 status code.
-
-    Args:
-        None. The function gets data from the POST request.
-
-    Returns:
-        A Response object with a status code. 
-        204: The configuration was set successfully.
-
-    """
-    global STARTED, STOPPED, PAUSED, QUIT
+            else:
+                ProcessFrame = copy.deepcopy(frame)
+                _, buffer = cv2.imencode('.jpg', frame)
+                frame = buffer.tobytes()
+                yield (b'--frame\r\n'
+                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                time.sleep(0.05)
+        except Exception:
+            print('Exception: Camera not detected')
+            break
     
-    data = request.get_json()
-    
-    STARTED = data['STARTED']
-    STOPPED = data['STOPPED']
-    PAUSED = data['PAUSED']
-    QUIT = data['QUIT']
-    
-    return Response(status=204)
+@app.route('/video_feed')
+def video_feed():
+    """
+    Route to send the video stream 
+    """
+    print("in video feed")
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/controls', methods=["POST"])
-def controls():
+def end_camera():
+    """stop the camera """
+    global camera
+    camera.release()
+
+def open_camera():
+    """open the camera """
+    global camera
+    os = recup_os.get_os()
+    if os == "Windows" :
+        camera = cv2.VideoCapture(cam_index, cv2.CAP_DSHOW)
+    elif os == "Linux" :
+        camera = cv2.VideoCapture(cam_index, cv2.V4L2)
+    else : 
+        camera = cv2.VideoCapture(cam_index)
+
+    try :
+        camera.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+        camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+    except :
+        pass
+    
+
+@app.route('/cam', methods=['POST', 'GET'])
+def getval():
+    """
+        Route to send the video stream 
+    """
+    global disabled_button, transparent_mode
+    
+    transparent_mode = False
+ 
+    try:
+        k = request.form['psw1']
+        if k == '0':
+            open_camera()
+            if camera.read()[0]:
+                New_game()
+                disabled_button = 'start-button'
+        elif k == '1':
+            end_camera()
+            disabled_button = 'stop-button'
+    except Exception:
+        print("Exception: Page can not be refreshed")
+    
+    
+    return render_template('partie.html', disabled_button=disabled_button)
+
+@app.route('/t', methods=['POST', 'GET'])
+def getvaltransparent():
+    """
+    Route to send the video stream 
+    """
+    global disabled_button, transparent_mode
+    
+    transparent_mode = True
+    try:
+        k = request.form['psw1']
+        if k == '0':
+            open_camera()
+            if camera.read()[0]:
+                New_game(True)
+                disabled_button = 'start-button'
+        elif k == '1':
+            end_camera()
+            disabled_button = 'stop-button'
+    except Exception:
+        print("Exception: Page can not be refreshed")
+        
+    return render_template('transparent.html', disabled_button=disabled_button)
+
+@app.route('/game', methods=['POST'])
+def getval2():
     """
         Change the current move
     """
-    control = request.data.decode('utf-8')
-    if control == "initial":
-        go_game.go_visual.initial_position()
-    elif control == "previous":
-        go_game.go_visual.previous()
-    elif control == "next":
-        go_game.go_visual.next()
-    elif control == "last":
-        go_game.go_visual.final_position()
-    else:
-        return Response(status=500)
-    print("Control success")
+    global transparent_mode
     
-    return Response(status=204)
+    transparent_mode = False
+    
+    i = request.form['psw2']
+    if i =='2':
+        go_game.go_visual.initial_position()
+    elif i == '3':
+        go_game.go_visual.previous()
+    elif i == '4':
+        go_game.go_visual.next()
+    elif i == '5':
+        go_game.go_visual.final_position() 
+    print(i)   
+    return render_template('partie.html', disabled_button=disabled_button)
 
-@app.route('/upload', methods=['POST'])
-def process():
+@app.route('/sgf_controls', methods=['POST'])
+def getval3():
     """
-        Route which enables us to load the sgf text
+        Change the current move
     """
-    file = request.files['file']
-    file_path = file.filename
+    global transparent_mode
+    
+    transparent_mode = False
+    
+    i = request.form['psw2']
+    if i =='2':
+        go_game.go_visual.initial_position()
+    elif i == '3':
+        go_game.go_visual.previous()
+    elif i == '4':
+        go_game.go_visual.next()
+    elif i == '5':
+        go_game.go_visual.final_position() 
+    print(i)   
+    return render_template('sgf.html', disabled_button=disabled_button)
+
+@app.route('/rules', methods=['POST'])
+def handle_rules():
+    """
+        Check if we want to apply rules, still not implemented
+    """
+    global rules_applied, transparent_mode
+    
+    transparent_mode = False
+    
+    rules_applied = request.form['psw3']
+    if rules_applied == "True":
+        go_game.set_transparent_mode(False)
+        rules_applied = "False"
+    else : 
+        go_game.set_transparent_mode(True)
+        print("########pas de regles")
+        rules_applied = "True"
+    return render_template('partie.html', disabled_button=disabled_button)
+
+@app.route('/change_place', methods=['POST'])
+def change_place():
+    """
+        Route to get the piece that we want to change its position
+        """
+    global transparent_mode
+    
+    transparent_mode = False
+    
+    old_pos = request.form['input1']
+    new_pos = request.form['input2']
     try:
-        new_game()
-        go_game.go_visual.load_game_from_sgf(file_path)
-        message = "Uploaded"
+        go_game.correct_stone(old_pos,new_pos)
     except Exception as e:
-        message = "Error:" + str(e)
-
-    return Response(status=204)
-
-@app.route('/undo', methods=['POST'])
-def undo():
-    """
-    Undo last played move
-    """
-    try:
-        go_game.delete_last_move()
-        return Response(status=204)
-    except Exception as e:
-        print(e)
-        return Response(status=502)
+        message = "L'erreur est "+str(e)
+    return render_template('partie.html', disabled_button=disabled_button)
 
 @app.route('/get_sgf_txt')
 def get_sgf_txt():
     """
         Route which returns the sgf text to be uploaded
         """
+    global transparent_mode
+    global sgf_text
+    if transparent_mode:
+        sgf_text = go_game.post_treatment(True)
+    return sgf_text
 
-    return {"sgf": go_game.get_sgf()}
+@app.route('/upload', methods=['POST'])
+def process():
+    """
+        Route which enables us to save the sgf text
+        """
+    global transparent_mode
+    
+    transparent_mode = False
+    file = request.files['file']
+    file_path = file.filename
+    try:
+        go_game.go_visual.load_game_from_sgf(file_path)
+        message = "Le fichier a été correctement chargé"
+    except Exception as e:
+        message = "L'erreur est "+str(e)
+    
 
-@app.route('/')
-def index():
-    """Route to display HTML page"""
-    return render_template('Home.html')
+    return render_template('sgf.html', disabled_button=disabled_button)
 
-@app.route('/home')
+@app.route('/Home')
 def home():
-    """Route to display HTML page"""
-    return render_template('Home.html')
+    """
+        Route to get to the home page
+        """    
+    open_camera()
+    return render_template('Home.html', disabled_button=disabled_button)
 
-@app.route('/stream')
-def stream():
+@app.route('/credit')
+def credit():
     """
-    Route to get to the streaming page in game mode
-    """
-    return render_template("stream.html")
+        Route to get to the credit page
+        """
+    return render_template("credits.html")
 
-
-@app.route('/play')
-def play():
+@app.route('/undo', methods=['POST'])
+def undo():
     """
-    Route to get to the streaming page in game mode
+    undo last played move
     """
-    new_game()
-    return render_template("play.html")
-
-@app.route('/sgf')
-def sgf():
-    """
-        Route to get to the streaming page in transparent mode
-    """
-    new_game()
-    return render_template("sgf.html")
-
+    global transparent_mode
+    
+    transparent_mode = False
+    
+    go_game.delete_last_move()
+    return render_template("partie.html")
+    
 @app.route('/historique')
 def historique():
     """
@@ -434,3 +383,43 @@ def historique():
     return render_template("Historique.html")
 
 
+@app.route('/partie')
+def partie():
+    """
+    Route to get to the streaming page in game mode
+    """
+    global transparent_mode
+    
+    transparent_mode = False
+
+    return render_template("partie.html", disabled_button=disabled_button)
+
+@app.route('/transparent')
+def transparent():
+    """
+        Route to get to the streaming page in transparent mode
+        """
+    go_game.set_transparent_mode(True)
+    global transparent_mode
+    
+    transparent_mode = False
+    return render_template("transparent.html")
+
+@app.route('/sgf')
+def sgf():
+    """
+        Route to get to the streaming page in transparent mode
+        """
+    global transparent_mode
+    
+    transparent_mode = False
+    return render_template("sgf.html")
+
+
+
+if __name__ == '__main__':
+    New_game()
+    # process_thread = threading.Thread(target=processing_thread, args=())
+    # process_thread.start()
+    app.run(debug=True)
+ 

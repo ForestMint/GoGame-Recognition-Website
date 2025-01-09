@@ -1,35 +1,55 @@
-{% extends "layout.html" %}
-
-{% block title %}History of Games{% endblock %}
-
-{% block content %}
-
-    <div class="container">
-        <div class="container text-center p-4">
-            <h1 class="title">Not yet available</h1>
-        </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Historique</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename = 'styles.css') }}">
+</head> 
+<body>
+    <script>
+        var tab_parties = [];
+        var tab_date = [];
+        var montant = 0;
+    </script>
+    <div class="container-fluid text-center text-light">
         <div class="container-fluid text-center">
-            <table class="table table-hover table-dark">
+            <div class="row">
+                <div class="col custom-color">        
+                    <a href= "{{ url_for('home') }}"><button class = "btn bg custom-button btn-petit">Retour</button></a>
+                </div>
+                <div class="container-2 text-center col custom-color custom-size">
+                    <b>Parties disponibles</b>
+                </div>
+                <div class="col custom-color">    
+                    <img src="{{ url_for('static', filename='Logo_Tanuki_gris.png') }}" class="logo logo-Tenuki" alt="Logo de l'association" id="logo"></img>
+                </div>
+            </div>
+        </div>
+
+        </br>
+        </br>
+        </br>
+
+
+        <div class="row">
+            <table id = "historique">
                 <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Black</th>
-                    <th scope="col">White</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Tournament</th>
-                    <th scope="col">SGF</th>
-                </tr>
+                    <tr>
+                        <th colspan="5"></th>
+                    </tr>                
                 </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>P1</td>
-                    <td>P2</td>
-                    <td>04/01/2024</td>
-                    <td>Training</td>
-                    <td>...</td>
+                <tbody>               
+                    <tr>
+                        <td>Date de réalisation</td>                    
+                        <td>Joueur 1</td>
+                        <td>Joueur 2</td>
+                        <td>Description</td>
+                        <td>Accès</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
-    </div>
-{% endblock %}
+        <script src="{{ url_for('static', filename='historiquejs.js') }}"></script>
+    </body>
+</html>
