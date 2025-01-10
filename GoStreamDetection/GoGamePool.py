@@ -22,4 +22,9 @@ class GoGamePool():
                 return True
         return False
 
+    def get_game_from_watcher_uuid(self, watcher_uuid):
+        for key, value in self.games.items():
+            if value ['uuid_for_watchers'] == watcher_uuid :
+                return value ['game']
+        return None
     

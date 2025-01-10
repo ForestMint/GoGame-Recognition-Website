@@ -404,6 +404,17 @@ def undo():
         print(e)
         return Response(status=502)
 
+@app.route('/request_updates_in_game_being_watched')
+def request_updates_in_game_being_watched():
+    data = request.get_json()
+    #print(data)
+    streamer_game_uuid = data['streamer_game_uuid'] 
+
+    my_game = my_go_game_pool.get_game_from_watcher_uuid(streamer_game_uuid)
+
+    my_jpg_image = my_game.go_visual.current_position()
+    return {"image":my_jpg_image}
+
 @app.route('/get_sgf_txt')
 def get_sgf_txt():
     """
