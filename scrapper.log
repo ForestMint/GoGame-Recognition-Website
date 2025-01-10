@@ -13695,3 +13695,190 @@
 09-Jan-25 23:49:17 - 127.0.0.1 - - [09/Jan/2025 23:49:17] "GET /static/client_logo.png HTTP/1.1" 200 - 
 09-Jan-25 23:49:19 - 127.0.0.1 - - [09/Jan/2025 23:49:19] "POST /update_state HTTP/1.1" 200 - 
 09-Jan-25 23:49:20 - 127.0.0.1 - - [09/Jan/2025 23:49:20] "POST /update_state HTTP/1.1" 200 - 
+10-Jan-25 13:48:47 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.49:5000 
+10-Jan-25 13:48:47 - [33mPress CTRL+C to quit[0m 
+10-Jan-25 13:48:47 -  * Restarting with stat 
+10-Jan-25 13:48:52 -  * Debugger is active! 
+10-Jan-25 13:48:52 -  * Debugger PIN: 112-738-644 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET / HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "[36mGET /static/fullboard.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "[36mGET /static/FloorGoban.jpg HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "[36mGET /static/GoStreamLogoTitleUnder.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 13:49:17 - 127.0.0.1 - - [10/Jan/2025 13:49:17] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:18 - 127.0.0.1 - - [10/Jan/2025 13:49:18] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:49:22 - 127.0.0.1 - - [10/Jan/2025 13:49:22] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 13:51:53 - 127.0.0.1 - - [10/Jan/2025 13:51:53] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 13:51:54 - 127.0.0.1 - - [10/Jan/2025 13:51:54] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:51:57 - 127.0.0.1 - - [10/Jan/2025 13:51:57] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 13:52:03 - 127.0.0.1 - - [10/Jan/2025 13:52:03] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 13:55:47 - 127.0.0.1 - - [10/Jan/2025 13:55:47] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:55:49 - 127.0.0.1 - - [10/Jan/2025 13:55:49] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:55:53 - 127.0.0.1 - - [10/Jan/2025 13:55:53] "GET /static/bootstrap/css/bootstrap.css.map HTTP/1.1" 200 - 
+10-Jan-25 13:55:55 - 127.0.0.1 - - [10/Jan/2025 13:55:55] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:17 - 127.0.0.1 - - [10/Jan/2025 13:56:17] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:56:18 - 127.0.0.1 - - [10/Jan/2025 13:56:18] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:57:59 - 127.0.0.1 - - [10/Jan/2025 13:57:59] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:00 - 127.0.0.1 - - [10/Jan/2025 13:58:00] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:01 - 127.0.0.1 - - [10/Jan/2025 13:58:01] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:02 - 127.0.0.1 - - [10/Jan/2025 13:58:02] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:04 - 127.0.0.1 - - [10/Jan/2025 13:58:04] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:33 - 127.0.0.1 - - [10/Jan/2025 13:58:33] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:34 - 127.0.0.1 - - [10/Jan/2025 13:58:34] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:36 - 127.0.0.1 - - [10/Jan/2025 13:58:36] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "GET / HTTP/1.1" 200 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/fullboard.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "GET /static/GoStreamLogoTitleUnder.png HTTP/1.1" 200 - 
+10-Jan-25 13:58:45 - 127.0.0.1 - - [10/Jan/2025 13:58:45] "[36mGET /static/FloorGoban.jpg HTTP/1.1[0m" 304 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 13:58:46 - 127.0.0.1 - - [10/Jan/2025 13:58:46] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 13:58:47 - 127.0.0.1 - - [10/Jan/2025 13:58:47] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:59:12 - 127.0.0.1 - - [10/Jan/2025 13:59:12] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:59:12 - 127.0.0.1 - - [10/Jan/2025 13:59:12] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 13:59:12 - 127.0.0.1 - - [10/Jan/2025 13:59:12] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 13:59:13 - 127.0.0.1 - - [10/Jan/2025 13:59:13] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 13:59:13 - 127.0.0.1 - - [10/Jan/2025 13:59:13] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 13:59:13 - 127.0.0.1 - - [10/Jan/2025 13:59:13] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 13:59:13 - 127.0.0.1 - - [10/Jan/2025 13:59:13] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:34 - 127.0.0.1 - - [10/Jan/2025 13:59:34] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 13:59:35 - 127.0.0.1 - - [10/Jan/2025 13:59:35] "[33mGET /watch.html?gameuuid= HTTP/1.1[0m" 404 - 
+10-Jan-25 13:59:35 - 127.0.0.1 - - [10/Jan/2025 13:59:35] "[33mGET /favicon.ico HTTP/1.1[0m" 404 - 
+10-Jan-25 13:59:50 - 127.0.0.1 - - [10/Jan/2025 13:59:50] "[33mGET /watch.html HTTP/1.1[0m" 404 - 
+10-Jan-25 14:01:49 -  * Detected change in 'C:\\Users\\pc\\Desktop\\GoGame-Recognition-Website\\main.py', reloading 
+10-Jan-25 14:01:49 -  * Restarting with stat 
+10-Jan-25 14:02:40 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.49:5000 
+10-Jan-25 14:02:40 - [33mPress CTRL+C to quit[0m 
+10-Jan-25 14:02:40 -  * Restarting with stat 
+10-Jan-25 14:02:45 -  * Debugger is active! 
+10-Jan-25 14:02:45 -  * Debugger PIN: 112-738-644 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "GET / HTTP/1.1" 200 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/fullboard.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/GoStreamLogoTitleUnder.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:45 - 127.0.0.1 - - [10/Jan/2025 14:02:45] "[36mGET /static/FloorGoban.jpg HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:47 - 127.0.0.1 - - [10/Jan/2025 14:02:47] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/bootstrap/css/bootstrap.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/Logo_IMT_Atlantique.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:55 - 127.0.0.1 - - [10/Jan/2025 14:02:55] "[36mGET /static/client_logo.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:02:57 - 127.0.0.1 - - [10/Jan/2025 14:02:57] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 14:02:57 - 127.0.0.1 - - [10/Jan/2025 14:02:57] "[33mGET /watch.html?gameuuid= HTTP/1.1[0m" 404 - 
+10-Jan-25 14:02:58 - 127.0.0.1 - - [10/Jan/2025 14:02:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 - 
+10-Jan-25 14:03:16 - 127.0.0.1 - - [10/Jan/2025 14:03:16] "[33mGET /watch.html?gameuuid= HTTP/1.1[0m" 404 - 
+10-Jan-25 14:03:18 - 127.0.0.1 - - [10/Jan/2025 14:03:18] "POST /validate_streamer_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 14:03:18 - 127.0.0.1 - - [10/Jan/2025 14:03:18] "[33mGET /watch.html?gameuuid= HTTP/1.1[0m" 404 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "GET / HTTP/1.1" 200 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/styles.css HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/GoStreamLogoTitleRight.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/GoStreamLogoTitleUnder.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/fullboard.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/FloorGoban.jpg HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:25 - 127.0.0.1 - - [10/Jan/2025 14:03:25] "[36mGET /static/GoStreamLogoWithoutTitle.png HTTP/1.1[0m" 304 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /type_game_uuid HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/GoStreamLogoTitleRight.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/GoStreamLogoWithoutTitle.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/client_logo.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:26 - 127.0.0.1 - - [10/Jan/2025 14:03:26] "GET /static/Logo_IMT_Atlantique.png HTTP/1.1" 200 - 
+10-Jan-25 14:03:27 - 127.0.0.1 - - [10/Jan/2025 14:03:27] "GET /watch?gameuuid= HTTP/1.1" 200 - 
+10-Jan-25 14:03:27 - 127.0.0.1 - - [10/Jan/2025 14:03:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 - 
+10-Jan-25 14:03:29 - 127.0.0.1 - - [10/Jan/2025 14:03:29] "GET /watch?gameuuid= HTTP/1.1" 200 - 
+10-Jan-25 14:12:39 - 127.0.0.1 - - [10/Jan/2025 14:12:39] "GET /watch?gameuuid= HTTP/1.1" 200 - 
+10-Jan-25 14:12:40 - 127.0.0.1 - - [10/Jan/2025 14:12:40] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 14:59:38 - 127.0.0.1 - - [10/Jan/2025 14:59:38] "GET /watch?gameuuid= HTTP/1.1" 200 - 
+10-Jan-25 14:59:40 - 127.0.0.1 - - [10/Jan/2025 14:59:40] "GET /static/bootstrap/css/bootstrap.css HTTP/1.1" 200 - 
+10-Jan-25 14:59:40 - 127.0.0.1 - - [10/Jan/2025 14:59:40] "GET /static/styles.css HTTP/1.1" 200 - 
+10-Jan-25 14:59:57 -  * Detected change in 'C:\\Users\\pc\\Desktop\\GoGame-Recognition-Website\\main.py', reloading 

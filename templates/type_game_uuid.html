@@ -5,7 +5,9 @@
 {% block content %}
 
     <div class="container py-4">
-        <form>
+        <!--<form action="https://google.com">-->
+        <!--<form action="/watch.html" method = "GET">-->
+        <form action="/watch" method = "GET">
             <label for="gameuuid">Game identifier:</label><br>
             <input type="text" id="gameuuid" name="gameuuid" value=""><br><br>
             <input id="validate_button" type="submit" value="Validate" onclick="validate_uuid();">

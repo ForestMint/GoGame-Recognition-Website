@@ -469,3 +469,7 @@ def validate_streamer_game_uuid():
     return {'result':my_go_game_pool.fetch_streamer_game_uuid(streamer_game_uuid)}
 
 
+@app.route('/watch')
+def watch():
+
+    return render_template("watch.html")
