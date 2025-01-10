@@ -429,7 +429,7 @@ def stream():
     """
     return render_template("stream.html")
 
-@app.route('/type_game_uuid')
+@app.route('/type_game_uuid', methods=['GET','POST'])
 def type_game_uuid():
     """
     Route to get to the streaming page in game mode
@@ -469,7 +469,9 @@ def validate_streamer_game_uuid():
     return {'result':my_go_game_pool.fetch_streamer_game_uuid(streamer_game_uuid)}
 
 
-@app.route('/watch')
+@app.route('/watch', methods=['GET', 'POST'])
 def watch():
-
-    return render_template("watch.html")
+    if 1 == 1 : 
+        return render_template("watch.html")
+    else:
+        return render_template("type_game_uuid.html")
