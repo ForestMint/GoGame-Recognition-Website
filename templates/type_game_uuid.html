@@ -9,22 +9,19 @@
         <!--<form action="/watch.html" method = "GET">-->
         <!--<form name="frm" id="frm" onsubmit="return check()">-->
         <!--<form name="frm" id="frm" >-->
-        <form name="frm" id="frm" onsubmit="return check()">
             <label for="gameuuid">Game identifier:</label><br>
             <input type="text" id="gameuuid" name="gameuuid" value=""><br><br>
             <!--<input id="validate_button" type="submit" value="Validate" onclick="validate_uuid();">-->
             <!--<input id="validate_button" type="submit" value="Validate" >-->
             <!--<input id="validate_button" type="submit" value="Validate" onclick="check()">-->
-            <input id="validate_button" type="submit" value="Validate" >
-        </form> 
-
+            <input type="button" value="Validate" onclick="check();">
     </div> 
 {% endblock %}
 {% block js %}<script>
 
 async function check() {
     console.log('titi');
-    var f = document.getElementById("frm");
+    //var f = document.getElementById("frm");
     //f.setAttribute('method',"post");
     my_streamer_game_uuid = document.getElementById("gameuuid").value;
 
@@ -44,10 +41,13 @@ async function check() {
         if (data.result) {
             console.log('right UUID')
             window.alert("The game identifier you typed is valid.");
-
-            f.setAttribute('method',"post");
-
+            
+            //f.setAttribute('method',"post");
+            /*
             f.setAttribute('action',"/watch");
+            */
+            window.location.href = '/watch';
+            return false;
         } else {
             console.log('wrong UUID')
 
