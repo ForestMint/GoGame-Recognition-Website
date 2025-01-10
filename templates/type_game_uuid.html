@@ -9,13 +9,13 @@
         <!--<form action="/watch.html" method = "GET">-->
         <!--<form name="frm" id="frm" onsubmit="return check()">-->
         <!--<form name="frm" id="frm" >-->
-        <form name="frm" id="frm" >
+        <form name="frm" id="frm" onsubmit="return check()">
             <label for="gameuuid">Game identifier:</label><br>
             <input type="text" id="gameuuid" name="gameuuid" value=""><br><br>
             <!--<input id="validate_button" type="submit" value="Validate" onclick="validate_uuid();">-->
             <!--<input id="validate_button" type="submit" value="Validate" >-->
-            <input id="validate_button" type="submit" value="Validate" onclick="check()">
-
+            <!--<input id="validate_button" type="submit" value="Validate" onclick="check()">-->
+            <input id="validate_button" type="submit" value="Validate" >
         </form> 
 
     </div> 
@@ -43,13 +43,17 @@ async function check() {
         //window.alert(data.result);
         if (data.result) {
             console.log('right UUID')
+            window.alert("The game identifier you typed is valid.");
+
+            f.setAttribute('method',"post");
+
             f.setAttribute('action',"/watch");
         } else {
             console.log('wrong UUID')
 
             window.alert("The game identifier you typed is invalid.");
 
-            f.setAttribute('action',"/type_game_uuid");
+            //f.setAttribute('action',"/type_game_uuid");
         }
     }
 
