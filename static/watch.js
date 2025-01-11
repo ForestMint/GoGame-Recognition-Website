@@ -50,6 +50,7 @@ async function update_watched_board(){
     } else {
         var data = await response.json();
         board.src = 'data:image/jpeg;base64,' + data.image;
+        console.log(data.image);
         board_context.drawImage(board, 0, 0);
         //game_uuid = data.game_uuid
 
