@@ -281,6 +281,7 @@ download_sgf_button.addEventListener("click", function() {
 
 
 start_button.addEventListener('click', function(event) {
+
     event.preventDefault();
     console.log("start");
 
@@ -300,6 +301,7 @@ start_button.addEventListener('click', function(event) {
                     GAME_UUID=data.new_game_uuid;
                     //GAME_UUID_FOR_STREAMERS=data.game_uuid_for_streamers
                     document.getElementById('game_identifier_value').innerHTML  = data.new_game_uuid_for_streamers;
+                    document.getElementById('game_uuid_for_watchers_division').style.visibility = "visible"; 
                     console.log("New game was initialized");
                     //console.log(data.new_game_uuid_for_streamers);
 
