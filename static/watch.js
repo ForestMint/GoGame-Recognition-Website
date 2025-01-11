@@ -7,10 +7,12 @@ board.src = 'static/unknown_board.jpg';
 //const { my_streamer_game_uuid } = require('./type_game_uuid.js');
 
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const game_uuid_for_watchers = urlParams.get('game_uuid_for_watchers')
+console.log(game_uuid_for_watchers);
 
 
-
-console.log(game_uuid_for_watcher);
 const board_canvas = document.getElementById("go-board");
 
 const board_context = board_canvas.getContext("2d");
@@ -39,7 +41,7 @@ async function update_watched_board(){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({streamer_game_uuid:my_streamer_game_uuid}),
+        body: JSON.stringify({streamer_game_uuid:game_uuid_for_watchers}),
     })
 
     if(response.status == 502){
