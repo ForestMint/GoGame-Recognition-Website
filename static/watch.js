@@ -6,6 +6,11 @@ board.src = 'static/unknown_board.jpg';
 
 //const { my_streamer_game_uuid } = require('./type_game_uuid.js');
 
+board.onload = function (){
+    // plot_context.drawImage(board, 0, 0);
+    board_context.drawImage(board, 0, 0);
+};
+
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
