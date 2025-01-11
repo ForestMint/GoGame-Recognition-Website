@@ -23,7 +23,7 @@ async function check() {
     console.log('titi');
     //var f = document.getElementById("frm");
     //f.setAttribute('method',"post");
-    my_streamer_game_uuid = document.getElementById("gameuuid").value;
+    const my_streamer_game_uuid = document.getElementById("gameuuid").value;
 
     var response = await fetch('/validate_streamer_game_uuid',{
         method: 'POST',

@@ -2,7 +2,7 @@
 var board = new Image();
 board.src = 'static/unknown_board.jpg';
 
-const game_uuid_for_watcher = "toto";
+const game_uuid_for_watcher = my_streamer_game_uuid;
 console.log(game_uuid_for_watcher);
 const board_canvas = document.getElementById("go-board");
 
