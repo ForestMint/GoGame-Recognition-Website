@@ -404,7 +404,7 @@ def undo():
         print(e)
         return Response(status=502)
 
-@app.route('/request_updates_in_game_being_watched')
+@app.route('/request_updates_in_game_being_watched', methods=['POST'])
 def request_updates_in_game_being_watched():
     data = request.get_json()
     #print(data)
