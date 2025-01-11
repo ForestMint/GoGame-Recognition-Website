@@ -160,6 +160,23 @@ async function update_state(game_uuid){
     }
 }
 
+function copyGameIdentifierForWatchersToClipboard() {
+    // Get the text field
+    var copyText = document.getElementById("game_identifier_value");
+  
+    /*
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+    */
+  
+     // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.innerHTML);
+  
+    // Alert the copied text
+    alert("Copied the text: " + copyText.innerHTML);
+  } 
+
 function update_state_loop() {
     update_state(GAME_UUID).then(() => {
         // Schedule the next execution after the asynchronous operation is complete
@@ -256,6 +273,8 @@ rules_button.addEventListener("change", function(){
         });
     }
 })
+
+
 
 
 download_sgf_button.addEventListener("click", function() {
