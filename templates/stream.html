@@ -34,17 +34,21 @@
                     <video autoplay playsinline id="videoElement" width="100%" hidden></video>
                     <canvas id="canvas" hidden></canvas>
                     <img id="camera-feed-closed" src="static/Feed.png" alt="Camera Feed">
+                    
                     <div class="col text-center bg-dark custom-color rounded">
                         <div id="message" class="py-1">
                             {{ message }}
                         </div>
 
                     </div>
-                    <div id="game_identifier_title" class="py-1">
-                        Game identifier (to be shared with streamers):
-                    </div>
-                    <div id="game_identifier_value" class="py-1">
-                        
+                    
+                    <div class="col text-center bg-dark custom-color rounded" id = "game_uuid_for_watchers_division">
+                        <div id="game_identifier_title" class="py-1">
+                            Game identifier :
+                        </div>
+                        <div id="game_identifier_value" class="py-1">
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="container col-6 px-4">

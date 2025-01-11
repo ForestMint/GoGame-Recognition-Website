@@ -216,3 +216,7 @@ bottom: auto;
 top: 0;
 width: 70%;
 }
+
+#game_uuid_for_watchers_division{
+  margin-top:10px;
+}
