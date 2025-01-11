@@ -315,18 +315,42 @@ def update_state():
 @app.route('/request_updates_in_game_being_watched', methods=['POST'])
 def request_updates_in_game_being_watched():
     data = request.get_json()
-    #print(data)
+
+
+
+
+    """
+
+    image_data_url = data['image']
+    # Extract the base64-encoded image data
+    _, image_base64 = image_data_url.split(',')
+    # if image_base64:
+    image_data = base64.b64decode(image_base64)
+    nparr = np.frombuffer(image_data, np.uint8)
+    
+    # Decode the image using OpenCV
+    frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+
+    """
+
     streamer_game_uuid = data['streamer_game_uuid'] 
     print(streamer_game_uuid)
+    game_uuid = my_go_game_pool.get_game_uuid_from_uuid_for_watcher(streamer_game_uuid)
 
+
+
+    """
     my_game = my_go_game_pool.get_game_from_watcher_uuid(streamer_game_uuid)
 
     my_jpg_image = my_game.go_visual.current_position()
+    """
     #return {"image":my_jpg_image}
     #return jsonify({"image":my_jpg_image})
 
     #get_game_uuid_from_uuid_for_watcher
-    return jsonify({"image":"toto"})
+    #return jsonify({"image":"toto"})
+    return {'message': message, 'image' : generate_plot(None, game_uuid)}
 
 @app.route('/get_config', methods=['GET'])
 def get_config():
