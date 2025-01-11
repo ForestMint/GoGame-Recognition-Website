@@ -19,11 +19,26 @@
 {% endblock %}
 {% block js %}<script>
 
+/*
+import dotenv from 'dotenv';
+dotenv.config();
+
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
+
+const api = express();
+*/
+
 async function check() {
     console.log('titi');
     //var f = document.getElementById("frm");
     //f.setAttribute('method',"post");
-    const my_streamer_game_uuid = document.getElementById("gameuuid").value;
+    my_streamer_game_uuid = document.getElementById("gameuuid").value;
 
     var response = await fetch('/validate_streamer_game_uuid',{
         method: 'POST',
@@ -46,7 +61,11 @@ async function check() {
             /*
             f.setAttribute('action',"/watch");
             */
-            window.location.href = '/watch';
+            //module.exports = {my_streamer_game_uuid};  
+            //export default my_streamer_game_uuid;     
+            var url = "/watch"     ;
+            url = url + "?" + my_streamer_game_uuid;
+            window.location.href = url;
             return false;
         } else {
             console.log('wrong UUID')
