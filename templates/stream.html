@@ -42,17 +42,21 @@
 
                     </div>
                     
-                    <div class="col text-center bg-dark custom-color rounded" id = "game_uuid_for_watchers_division">
+                    <div id = "game_uuid_for_watchers_division" class="col text-center bg-dark custom-color rounded">
                         <div id="game_identifier_title" class="py-1">
-                            Game identifier :
-                        </div>
-                        <div id="game_identifier_value" class="py-1">
+                            <p>Game identifier :</p>
                             
                         </div>
-                        <div id="game_identifier_value_copy_button" class="py-1">
-                            <button onclick="copyGameIdentifierForWatchersToClipboard()">Copy text</button> 
-                           
-                        </div>
+
+
+
+
+                        <div style="text-align:center;">
+                            <div id="game_identifier_value" class="py-1" style="border:1px solid #000; display:inline-block;"></div>
+                            <div id="game_identifier_value_copy_button" class="py-1"style="border:1px solid red; display:inline-block;">
+                                <button onclick="copyGameIdentifierForWatchersToClipboard()">Copy</button> 
+                            </div>
+                        </div> 
 
                     </div>
 

@@ -220,6 +220,7 @@ width: 70%;
 #game_uuid_for_watchers_division{
   margin-top:10px;
   visibility: hidden;
+  background-color: #000000;
 }
 
 #game_identifier_value{
