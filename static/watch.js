@@ -1,4 +1,4 @@
-/*"use strict";
+"use strict";
 var board = new Image();
 board.src = 'static/unknown_board.jpg';
 
@@ -7,7 +7,7 @@ console.log(game_uuid_for_watcher);
 const board_canvas = document.getElementById("go-board");
 
 const board_context = board_canvas.getContext("2d");
-*/
+
 
 /*
 
@@ -18,14 +18,14 @@ do {
 while (true);
 */
 
-/*
+
 setInterval(function() {
     // Do something every 3 seconds
     update_watched_board();
 }, 3000);
-*/
 
-/*
+
+
 async function update_watched_board(){
     var response = await fetch('/request_updates_in_game_being_watched', {
         method: 'POST',
@@ -47,4 +47,3 @@ async function update_watched_board(){
         //MESSAGE = data.message;
     }
 }
-*/
