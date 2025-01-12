@@ -223,10 +223,6 @@ width: 70%;
   background-color: #000000;
 }
 
-#game_identifier_value{
-  float: left;
-}
-
-#game_identifier_value_copy_button{
-  float : right;
+.copyGameIdentifierForWatchersToClipboard{
+  background-color:yellow;
 }
