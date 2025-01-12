@@ -218,9 +218,15 @@ width: 70%;
 }
 
 #game_uuid_for_watchers_division{
-  margin-top:10px;
+  margin-top:15px;
   visibility: hidden;
   background-color: #000000;
+}
+
+#game_identifier_title{
+  background-color: #ecce97;
+  color: #000000;
+  border-radius : 5px 5px 0 0 ;
 }
 
 #game_identifier_value{
