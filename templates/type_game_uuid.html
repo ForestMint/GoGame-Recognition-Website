@@ -71,6 +71,7 @@ async function check() {
             console.log('wrong UUID')
 
             window.alert("The game identifier you typed is invalid.");
+            document.getElementById("gameuuid").value = "";
 
             //f.setAttribute('action',"/type_game_uuid");
         }
