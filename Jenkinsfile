@@ -1,74 +1,46 @@
 pipeline {
     agent any
-
     environment {
-        DOCKER_IMAGE = 'my-python-app:latest'
-        DEPLOY_SERVER = 'user@your-server-ip'
-        DEPLOY_PATH = '/var/www/my-python-app'
-        APP_PORT = '8000'  // Change based on your app
+        VM_HOST = 'your.vm.ip.address'
+        VM_USER = 'your-username'
+        SSH_CREDENTIALS = 'vm-ssh-key'
+        IMAGE_NAME = 'flaskapp'
+        IMAGE_TAG = "latest"
+        DEPLOY_DIR = '/home/your-username'
     }
-
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo/my-python-app.git'
+                git 'git@github.com:youruser/your-flask-repo.git'
             }
         }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'python3 -m venv venv'
-                sh './venv/bin/pip install --upgrade pip'
-                sh './venv/bin/pip install -r requirements.txt'
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh './venv/bin/python -m unittest discover tests'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
-            }
-        }
-
-        stage('Push Docker Image') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker tag $DOCKER_IMAGE $DOCKER_USER/my-python-app:latest
-                        docker push $DOCKER_USER/my-python-app:latest
-                    '''
+                script {
+                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
                 }
             }
         }
-
-        stage('Deploy') {
+        stage('Deploy to VM') {
             steps {
-                sshagent(['ssh-deploy-key']) {
-                    sh '''
-                        ssh $DEPLOY_SERVER '
-                            docker pull $DOCKER_USER/my-python-app:latest &&
-                            docker stop my-python-app || true &&
-                            docker rm my-python-app || true &&
-                            docker run -d --name my-python-app -p 80:$APP_PORT $DOCKER_USER/my-python-app:latest
-                        '
-                    '''
+                sshagent([SSH_CREDENTIALS]) {
+                    // Save and copy image to VM or push to Docker registry (if any)
+                    sh """
+                    docker save ${IMAGE_NAME}:${IMAGE_TAG} -o ${IMAGE_NAME}.tar
+                    scp -o StrictHostKeyChecking=no ${IMAGE_NAME}.tar ${VM_USER}@${VM_HOST}:${DEPLOY_DIR}
+                    ssh -o StrictHostKeyChecking=no ${VM_USER}@${VM_HOST} '
+                        docker load -i ${DEPLOY_DIR}/${IMAGE_NAME}.tar &&
+                        docker stop ${IMAGE_NAME} || true &&
+                        docker rm ${IMAGE_NAME} || true &&
+                        docker run -d --name ${IMAGE_NAME} -p 5000:5000 ${IMAGE_NAME}:${IMAGE_TAG}
+                    '
+                    """
                 }
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Python app deployed successfully!'
-        }
-        failure {
-            echo 'Deployment failed.'
         }
     }
 }
+
+
+
+
